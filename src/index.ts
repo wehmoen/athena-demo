@@ -24,6 +24,11 @@ server.use(session({
     // Secret should be static and come from an environment variable in production
     secret: randomBytes(16).toString('hex'),
     resave: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+    },
     saveUninitialized: true,
 }));
 
